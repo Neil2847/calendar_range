@@ -1,4 +1,4 @@
-library calendarrange;
+library calendar_range;
 
 import 'dart:async';
 import 'dart:math' as math;
