@@ -1,4 +1,4 @@
-# calendarrange
+# calendar_range
 
 Calendar multiple days selections.
 
