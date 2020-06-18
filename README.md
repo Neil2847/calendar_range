@@ -1,14 +1,41 @@
-# calendar_range
+## Demo
 
-Calendar multiple days selections.
+![https://github.com/Neil2847/calendar_range/blob/master/demo.gif](demo.gif)
 
 ## Getting Started
 
-This project is a starting point for a Dart
-[package](https://flutter.dev/developing-packages/),
-a library module containing code that can be shared easily across
-multiple Flutter or Dart projects.
+### Installation
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+Add to `pubspec.yaml` in `dependencies` 
+
+...
+  calendar_range:
+    git:
+      url: https://github.com/Neil2847/calendar_range.git
+...
+
+### Usage
+...
+import 'package:calendar_range/calendar_range.dart';
+...
+    return Container(
+      color: Colors.orange,
+      child: SafeArea(
+        child: CalendarRange(
+          initialFirstDate: DateTime.parse('2020-06-18'),
+          initialLastDate: null,
+          firstDate: new DateTime(2018),
+          lastDate: new DateTime(2021),
+          selectedColor: Colors.blueGrey,
+          btnColor: Colors.red,
+          arrowColor: Colors.blue,
+          btnTitle: '確認',
+          onClick: (days) {
+            days.forEach((date) {
+              print('selected date :$date');
+            });
+          },
+        ),
+      ),
+    );
+...
