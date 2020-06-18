@@ -8,16 +8,17 @@
 
 Add to `pubspec.yaml` in `dependencies` 
 
-...
+```
   calendar_range:
     git:
       url: https://github.com/Neil2847/calendar_range.git
-...
+```
 
 ### Usage
-...
-import 'package:calendar_range/calendar_range.dart';
-...
+    ```
+    import 'package:calendar_range/calendar_range.dart';
+
+    ```
     return Container(
       color: Colors.orange,
       child: SafeArea(
@@ -38,4 +39,4 @@ import 'package:calendar_range/calendar_range.dart';
         ),
       ),
     );
-...
+```
