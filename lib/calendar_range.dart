@@ -598,75 +598,78 @@ class _MonthRangeState extends State<MonthRange>
 
   @override
   Widget build(BuildContext context) {
-    return new SizedBox(
-      width: _kMonthRangePortraitWidth,
-      height: _kMaxDayRangeHeight,
-      child: new Stack(
-        children: <Widget>[
-          new Semantics(
-            sortKey: _MonthRangeSortKey.calendar,
-            child: new NotificationListener<ScrollStartNotification>(
-              onNotification: (_) {
-                _chevronOpacityController.forward();
-                return false;
-              },
-              child: new NotificationListener<ScrollEndNotification>(
+    return Scaffold(
+      body: new SizedBox(
+        width: _kMonthRangePortraitWidth,
+        height: _kMaxDayRangeHeight,
+        child: new Stack(
+          children: <Widget>[
+            new Semantics(
+              sortKey: _MonthRangeSortKey.calendar,
+              child: new NotificationListener<ScrollStartNotification>(
                 onNotification: (_) {
-                  _chevronOpacityController.reverse();
+                  _chevronOpacityController.forward();
                   return false;
                 },
-                child: new PageView.builder(
-                  key: new ValueKey<DateTime>(widget.selectedFirstDate == null
-                      ? widget.selectedFirstDate
-                      : widget.selectedLastDate),
-                  controller: _dayRangeController,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: _monthDelta(widget.firstDate, widget.lastDate) + 1,
-                  itemBuilder: _buildItems,
-                  onPageChanged: _handleMonthPageChanged,
-                ),
-              ),
-            ),
-          ),
-          new PositionedDirectional(
-            top: 0.0,
-            start: 8.0,
-            child: new Semantics(
-              sortKey: _MonthRangeSortKey.previousMonth,
-              child: new FadeTransition(
-                opacity: _chevronOpacityAnimation,
-                child: new IconButton(
-                  icon: Icon(Icons.chevron_left, color: widget.arrowColor),
-                  tooltip: _isDisplayingFirstMonth
-                      ? null
-                      : '${localizations.previousMonthTooltip} ${localizations.formatMonthYear(_previousMonthDate)}',
-                  onPressed:
-                      _isDisplayingFirstMonth ? null : _handlePreviousMonth,
-                ),
-              ),
-            ),
-          ),
-          new PositionedDirectional(
-            top: 0.0,
-            end: 8.0,
-            child: new Semantics(
-              sortKey: _MonthRangeSortKey.nextMonth,
-              child: new FadeTransition(
-                opacity: _chevronOpacityAnimation,
-                child: new IconButton(
-                  icon: Icon(
-                    Icons.chevron_right,
-                    color: widget.arrowColor,
+                child: new NotificationListener<ScrollEndNotification>(
+                  onNotification: (_) {
+                    _chevronOpacityController.reverse();
+                    return false;
+                  },
+                  child: new PageView.builder(
+                    key: new ValueKey<DateTime>(widget.selectedFirstDate == null
+                        ? widget.selectedFirstDate
+                        : widget.selectedLastDate),
+                    controller: _dayRangeController,
+                    scrollDirection: Axis.horizontal,
+                    itemCount:
+                        _monthDelta(widget.firstDate, widget.lastDate) + 1,
+                    itemBuilder: _buildItems,
+                    onPageChanged: _handleMonthPageChanged,
                   ),
-                  tooltip: _isDisplayingLastMonth
-                      ? null
-                      : '${localizations.nextMonthTooltip} ${localizations.formatMonthYear(_nextMonthDate)}',
-                  onPressed: _isDisplayingLastMonth ? null : _handleNextMonth,
                 ),
               ),
             ),
-          ),
-        ],
+            new PositionedDirectional(
+              top: 0.0,
+              start: 8.0,
+              child: new Semantics(
+                sortKey: _MonthRangeSortKey.previousMonth,
+                child: new FadeTransition(
+                  opacity: _chevronOpacityAnimation,
+                  child: new IconButton(
+                    icon: Icon(Icons.chevron_left, color: widget.arrowColor),
+                    tooltip: _isDisplayingFirstMonth
+                        ? null
+                        : '${localizations.previousMonthTooltip} ${localizations.formatMonthYear(_previousMonthDate)}',
+                    onPressed:
+                        _isDisplayingFirstMonth ? null : _handlePreviousMonth,
+                  ),
+                ),
+              ),
+            ),
+            new PositionedDirectional(
+              top: 0.0,
+              end: 8.0,
+              child: new Semantics(
+                sortKey: _MonthRangeSortKey.nextMonth,
+                child: new FadeTransition(
+                  opacity: _chevronOpacityAnimation,
+                  child: new IconButton(
+                    icon: Icon(
+                      Icons.chevron_right,
+                      color: widget.arrowColor,
+                    ),
+                    tooltip: _isDisplayingLastMonth
+                        ? null
+                        : '${localizations.nextMonthTooltip} ${localizations.formatMonthYear(_nextMonthDate)}',
+                    onPressed: _isDisplayingLastMonth ? null : _handleNextMonth,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
